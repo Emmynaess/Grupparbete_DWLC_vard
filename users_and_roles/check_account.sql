@@ -1,4 +1,2 @@
 USE ROLE ORGADMIN;
 SHOW ACCOUNTS;
-
-pz09672.west-europe.azure
