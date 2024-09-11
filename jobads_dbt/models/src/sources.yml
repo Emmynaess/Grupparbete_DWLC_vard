@@ -1,0 +1,6 @@
+sources:
+    - name: jobads_dbt
+      schema: staging
+      tables: 
+          - name: stg_data_ads
+            identifier: healthcare_job_ads
