@@ -12,7 +12,7 @@ SELECT
     relevance,
     coalesce(vacancies, 1) as vacancies,
     application_deadline,
-    publishing_date
+    published_date,
 
 FROM 
     job_ads 
