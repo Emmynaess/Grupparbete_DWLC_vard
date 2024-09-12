@@ -5,9 +5,9 @@ from connect_dw import query_job_listings
 def layout():
     df = query_job_listings()
 
-    st.title("Data engineering job ads")
+    st.title("Health care job ads")
     st.write(
-        "This dashboard shows data engineering job ads from arbetsförmedlingens API. "
+        "This dashboard shows health care related job ads from arbetsförmedlingens API. "
     )
 
     st.markdown("## Vacancies")
