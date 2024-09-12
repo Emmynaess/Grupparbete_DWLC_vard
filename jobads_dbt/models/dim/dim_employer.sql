@@ -11,4 +11,4 @@ SELECT
     {{ capitalize_first_letter("coalesce(workplace_city, 'city not specified')") }} AS workplace_city,
     COALESCE(workplace_country, 'country not specified') AS workplace_country
 
-FROM src_employer;
+FROM src_employer
