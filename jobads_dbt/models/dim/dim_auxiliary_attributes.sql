@@ -6,4 +6,4 @@ SELECT
     experience_required,
     COALESCE(driver_license, 'not specified') AS driving_license_required,
     access_to_own_car
-FROM src_auxiliary_attributes;
+FROM src_auxiliary_attributes
