@@ -6,7 +6,10 @@ job_details AS (
 ),
 employer AS (
     SELECT * FROM {{ ref('dim_employer') }}
-)
+),
+auxiliary_attributes AS (
+    SELECT * FROM {{ ref('dim_auxiliary_attributes') }}
+),
 
 SELECT
     jd.headline,

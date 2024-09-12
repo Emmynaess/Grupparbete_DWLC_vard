@@ -12,12 +12,7 @@ SELECT
     relevance,
     coalesce(vacancies, 1) as vacancies,
     application_deadline,
-    -- for verifying FK relationships work
-    job_ads.id,
-    employer.workplace_city,
-    employer.employer_name,
-    job_details.description,
-    auxiliary_attributes.experience_required,
+    publishing_date
 
 FROM 
     job_ads 
