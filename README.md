@@ -34,6 +34,7 @@ SNOWFLAKE_ACCOUNT = <insert account_locator.cloud_region_id.cloud - the part of 
 SNOWFLAKE_WAREHOUSE = <insert warehouse name>
 SNOWFLAKE_DATABASE = <insert database name>
 SNOWFLAKE_SCHEMA = <insert schema>
-SNOWFLAKE_ROLE = <insert the role that was created for the reporter user>```
+SNOWFLAKE_ROLE = <insert the role that was created for the reporter user>
+```
 
 After you are done with `.env`file and saved it, you can run `run_dashboard.py`. The script should open a browser window that contains the dashboard, `localhost:8501` as URL. Enjoy!
