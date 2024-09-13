@@ -11,23 +11,29 @@ def layout():
     )
 
     st.markdown("## Vacancies")
-    cols = st.columns(3)
+    cols = st.columns(4)
 
     with cols[0]:
         st.metric(label="Total", value=df["VACANCIES"].sum())
 
     with cols[1]:
         st.metric(
+            label="In Stockholm",
+            value=df.query("WORKPLACE_CITY == 'Stockholm'")["VACANCIES"].sum(),
+        )
+     
+    with cols[2]:
+        st.metric(
             label="In Göteborg",
             value=df.query("WORKPLACE_CITY == 'Göteborg'")["VACANCIES"].sum(),
         )
 
-    with cols[2]:
+    with cols[3]:
         st.metric(
-            label="In Stockholm",
-            value=df.query("WORKPLACE_CITY == 'Stockholm'")["VACANCIES"].sum(),
+            label="In Malmö",
+            value=df.query("WORKPLACE_CITY == 'Malmö'")["VACANCIES"].sum(),
         )
-
+ 
     cols = st.columns(2)
 
     with cols[0]:
@@ -64,6 +70,28 @@ def layout():
             x="EMPLOYER_NAME",
             y="VACANCIES",
         )
+
+    st.markdown("## Vacancies per region")
+    cols = st.columns(1)
+
+    with cols[0]:
+        st.bar_chart(
+            query_job_listings(
+                """
+                    SELECT 
+                        SUM(vacancies) as vacancies,
+                        workplace_region
+                    FROM 
+                        mart_job_listings
+                    GROUP BY 
+                        workplace_region
+                    ORDER BY vacancies DESC;
+                    """
+            ),
+            x="WORKPLACE_REGION",
+            y="VACANCIES",
+        )
+
 
     st.markdown("## Find advertisement")
 
