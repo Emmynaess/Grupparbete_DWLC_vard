@@ -9,7 +9,7 @@ employer AS (
 ),
 auxiliary_attributes AS (
     SELECT * FROM {{ ref('dim_auxiliary_attributes') }}
-),
+)
 
 SELECT
     jd.headline,
@@ -18,6 +18,7 @@ SELECT
     f.relevance,
     e.employer_name,
     e.workplace_city,
+    e.workplace_region,
     jd.description,
     jd.description_html_formatted,
     jd.duration,
