@@ -10,7 +10,7 @@ def layout():
 
     st.title("Health care job ads")
     st.write(
-        "This dashboard shows health care related job ads from arbetsförmedlingens API. "
+        "This dashboard shows health care related job ads from Swedish Public Employment Service's API. "
     )
 
     # Total number of vacancies and vacancies per city
@@ -96,15 +96,16 @@ def layout():
             y="VACANCIES",
         )
 
-    st.markdown("## Salary type and employment duration")
-    cols = st.columns(2)
+    st.markdown("## Employment duration")
+    cols = st.columns(1)
     
     # donut chart for salary type
     with cols[0]:
         fig, ax = plt.subplots(figsize=(5, 5))
-        df["SALARY_TYPE"].value_counts().plot.pie(autopct="%1.1f%%", textprops={"color": "dark yellow", "fontsize": 16})
+        df["DURATION"].value_counts().plot.pie(autopct="%1.0f%%", 
+                                                  textprops={"color": "w", "fontsize": 14})
         fig.patch.set_alpha(0)  # Transparent background for the figure
-        ax.set_facecolor('none')
+        ax.set_facecolor('grey')
         plt.axis("equal")
         st.pyplot(fig)
 
