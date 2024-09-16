@@ -110,7 +110,6 @@ models:
           - dbt_expectations.expect_column_values_to_be_in_set:
               value_set: ['Vanlig anställning', 'Behovsanställning', 'Sommarjobb / feriejobb', 'Type not specified']
 
-
       - name: duration
         description: 'The time frame of the employment'
         data_tests:
