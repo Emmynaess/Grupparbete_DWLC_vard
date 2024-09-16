@@ -96,6 +96,18 @@ def layout():
             y="VACANCIES",
         )
 
+    st.markdown("## Salary type and employment duration")
+    cols = st.columns(2)
+    
+    # donut chart for salary type
+    with cols[0]:
+        fig, ax = plt.subplots(figsize=(5, 5))
+        df["SALARY_TYPE"].value_counts().plot.pie(autopct="%1.1f%%", textprops={"color": "dark yellow", "fontsize": 16})
+        fig.patch.set_alpha(0)  # Transparent background for the figure
+        ax.set_facecolor('none')
+        plt.axis("equal")
+        st.pyplot(fig)
+
     st.markdown("## Find advertisement")
 
     cols = st.columns(2)
