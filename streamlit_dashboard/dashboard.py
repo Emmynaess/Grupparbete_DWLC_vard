@@ -1,5 +1,8 @@
 import streamlit as st
 from connect_dw import query_job_listings
+from wordcloud import WordCloud
+import matplotlib.pyplot as plt
+import pandas as pd
 
 
 def layout():
@@ -10,6 +13,7 @@ def layout():
         "This dashboard shows health care related job ads from arbetsförmedlingens API. "
     )
 
+    # Total number of vacancies and vacancies per city
     st.markdown("## Vacancies")
     cols = st.columns(4)
 
@@ -92,7 +96,6 @@ def layout():
             y="VACANCIES",
         )
 
-
     st.markdown("## Find advertisement")
 
     cols = st.columns(2)
@@ -115,6 +118,31 @@ def layout():
         unsafe_allow_html=True,
     )
 
+    # Word cloud
+    st.markdown("## Most used words in job ads")
+    st.write("This word cloud shows the most used words in the job ads. Choose topic to see the word cloud for headlines or descriptions.")
+
+
+    topic = st.selectbox('Select topic',['Headline', 'Job description'])
+    if topic == 'Headline':
+        content = pd.DataFrame(df["HEADLINE"])
+    else:
+        content = pd.DataFrame(df["DESCRIPTION"])
+
+
+    wordcloud = WordCloud(stopwords={'till', 'för', 'som', 'i', 'på', 'och', 
+                                     'med', 'n', 'en', 'ett', 'r', 'av', 'eller',
+                                     'att', 'den', 'det'},
+                          width=1000, height=500).generate_from_text(content.to_string())
+
+    # Display wordcloud
+    fig, ax = plt.subplots(figsize = (20, 10), facecolor ='k')
+    ax.imshow(wordcloud)
+    plt.axis("off")
+    plt.tight_layout(pad=0)
+    st.pyplot(fig)
+
+    # Show the data4
     st.markdown("## Job listings data")
     st.dataframe(df)
 
