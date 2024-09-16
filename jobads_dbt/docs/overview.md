@@ -18,7 +18,7 @@ This field refers for the type of occupation associated with a job under a speci
 This field represents a score or ranking that indicates how closely a job matches certain criteria, such as user preferences, search terms or job-seeker profiles.
 
 4. employer_name (dim_employer)
-this field represents the official name of the employer or organization offering the job, associated with the job ad.
+This field represents the official name of the employer or organization offering the job, associated with the job ad.
 
 ## Macros overview
 
