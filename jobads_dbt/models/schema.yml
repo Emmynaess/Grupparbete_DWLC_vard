@@ -1,8 +1,10 @@
 models:
   - name: dim_employer
-    
+    description: 'Data regarding the employer that created the ad such as
+                  Name, Organization number, Location'
     columns:
       - name: employer_id
+        description: 'Primary key, a surrogate key created with id and employer_name'
         data_tests:
           - unique
           - not_null
@@ -10,59 +12,68 @@ models:
               column_type: varchar
 
       - name: employer_name
+        description: 'Employers company/organization name'
         data_tests:
           - not_null
           - dbt_expectations.expect_column_values_to_be_of_type:
               column_type: varchar
 
       - name: employer_workplace
+        description: 'Where the employee will work'
         data_tests:
           - not_null
           - dbt_expectations.expect_column_values_to_be_of_type:
               column_type: varchar
       
       - name: employer_organization_number
+        description: 'Identifier for the company/organization'
         data_tests:
           - not_null
           - dbt_expectations.expect_column_values_to_be_of_type:
               column_type: varchar
       
       - name: workplace_street_address
+        description: 'Street adress of the workplace'
         data_tests:
           - not_null
           - dbt_expectations.expect_column_values_to_be_of_type:
               column_type: varchar
 
       - name: workplace_region
+        description: 'Region the workplace is located in'
         data_tests:
           - not_null
           - dbt_expectations.expect_column_values_to_be_of_type:
               column_type: varchar
 
       - name: workplace_postcode
+        description: 'Postcode of the workplace'
         data_tests:
           - not_null
           - dbt_expectations.expect_column_values_to_be_of_type:
               column_type: varchar
 
       - name: workplace_city
+        description: 'City the workplace is located in'
         data_tests:
           - not_null
           - dbt_expectations.expect_column_values_to_be_of_type:
               column_type: varchar
 
       - name: workplace_country
+        description: 'Country the workplace is located in'
         data_tests:
           - not_null
           - dbt_expectations.expect_column_values_to_be_of_type:
               column_type: varchar
 
 
-
-
   - name: dim_job_details
+    description: 'Data about the details of the job in the ad, such as
+                  headline/description, employement type, duration, salary type, scope and occupation'
     columns:
       - name: job_details_id
+        description: 'Primary key, surrogate key created with id and headline'
         data_tests:
           - not_null
           - unique
@@ -70,33 +81,38 @@ models:
               column_type: varchar
 
       - name: headline
+        description: 'The headline of the job ad'
         data_tests:
           - not_null
           - dbt_expectations.expect_column_values_to_be_of_type:
               column_type: varchar
 
       - name: description
+        description: 'The description of the job in the ad'
         data_tests:
           - not_null
           - dbt_expectations.expect_column_values_to_be_of_type:
               column_type: varchar
 
       - name: description_html_formatted
+        description: 'A formated verion of "description", formated to html'
         data_tests:
           - not_null
           - dbt_expectations.expect_column_values_to_be_of_type:
               column_type: varchar
 
       - name: employment_type
+        description: 'Which type of employment, such as regular employment, on demand employment etc.'
         data_tests:
           - not_null
           - dbt_expectations.expect_column_values_to_be_of_type:
               column_type: varchar
           - dbt_expectations.expect_column_values_to_be_in_set:
-              value_set: ['Vanlig anställning', 'Behovsanställning', 'Sommaranställning / feriejobb', 'Type not specified']
+              value_set: ['Vanlig anställning', 'Behovsanställning', 'Sommarjobb / feriejobb', 'Type not specified']
 
 
       - name: duration
+        description: 'The time frame of the employment'
         data_tests:
           - not_null
           - dbt_expectations.expect_column_values_to_be_of_type:
@@ -105,12 +121,14 @@ models:
               value_set: ['6 månader eller längre', 'Tills vidare', 'Duration not specified', '3 månader – upp till 6 månader', '11 dagar - upp till 3 månader']
         
       - name: salary_type
+        description: 'How the employee will be paid'
         data_tests:
           - not_null
           - dbt_expectations.expect_column_values_to_be_of_type:
               column_type: varchar
 
       - name: scope_of_work_min
+        description: 'The minimum amount of time the employee will work as a %'
         data_tests:
           - dbt_expectations.expect_column_values_to_be_between:
               min_value: 0
@@ -119,6 +137,7 @@ models:
               column_type: number
 
       - name: scope_of_work_max
+        description: 'The maximum amount of time the employee will work as a %'
         data_tests:
           - dbt_expectations.expect_column_values_to_be_between:
               min_value: 0
@@ -127,14 +146,19 @@ models:
               column_type: number
 
       - name: occupation_label
+        description: 'Which type of work it will be'
         data_tests:
           - not_null
           - dbt_expectations.expect_column_values_to_be_of_type:
               column_type: varchar
 
+
   - name: dim_auxiliary_attributes
+    description: 'Some extra information about the job such as
+                  is experience/drivers license/owning car required'
     columns:
       - name: auxiliary_attributes_id
+        description: 'Primary key, surrogate key created by id and experience_required'
         data_tests:
          - not_null
          - unique
@@ -142,28 +166,32 @@ models:
               column_type: varchar
 
       - name: experience_required
+        description: 'If any prior experience is required for the job'
         data_tests:
          - not_null
          - dbt_expectations.expect_column_values_to_be_of_type:
               column_type: boolean
 
       - name: driving_license_required
+        description: 'If a drivers license is required for the job'  
         data_tests:
          - not_null
          - dbt_expectations.expect_column_values_to_be_of_type:
               column_type: boolean
 
       - name: access_to_own_car
+        description: 'If having access to a personal car is required for the job'
         data_tests:
          - not_null
          - dbt_expectations.expect_column_values_to_be_of_type:
               column_type: boolean
 
-
-
   - name: fct_job_ads
+    description: 'Facts about the job add, such as
+                  foreign key of dim models, relevance, vacancies, dates'
     columns:
       - name: job_ads_key
+        description: 'Primary key, surrogate key created by job_ads.id and job_ads.headline'
         data_tests:
           - unique
           - not_null
@@ -171,6 +199,7 @@ models:
               column_type: varchar
 
       - name: job_details_key
+        description: 'Foreign key, surrogate key created by job_details.id and job_details.headline'
         data_tests:
           - relationships:
               to: ref('dim_job_details')
@@ -180,6 +209,7 @@ models:
           - not_null
 
       - name: employer_key
+        description: 'Foreign key, surrogate key created by employer.id and employer.employer_name'
         data_tests:
           - relationships:
               to: ref('dim_employer')
@@ -189,6 +219,8 @@ models:
           - not_null
 
       - name: auxiliary_attributes_key
+        description: 'Foreign key, surrogate key created by 
+                      auxiliary_attributes.id and auxiliary_attributes.experience_required'
         data_tests:
           - relationships:
               to: ref('dim_auxiliary_attributes')
@@ -198,6 +230,7 @@ models:
           - not_null
 
       - name: relevance
+        description: 'The relevance graded by the data provider'
         data_tests:
           - dbt_expectations.expect_column_values_to_be_between:
               min_value: 0  
@@ -207,6 +240,7 @@ models:
           - not_null
 
       - name: vacancies
+        description: 'The number of job vacancies for the position'
         data_tests: 
           - dbt_expectations.expect_column_quantile_values_to_be_between:
               quantile: .99
@@ -222,12 +256,14 @@ models:
           - not_null
 
       - name: application_deadline
+        description: 'Last date for applying to the job'
         data_tests:
           - dbt_expectations.expect_column_values_to_be_of_type:
               column_type: Timestamp_TZ
           - not_null
 
       - name: published_date
+        description: 'Date the ad was published'
         data_tests:
           - dbt_expectations.expect_column_values_to_be_of_type:
               column_type: Timestamp_TZ
