@@ -6,7 +6,7 @@ Here information about the project will be shown
 
 ## Dimensional model
 
-![Dimensional model](assets/job_ads_health_dimension_modell.png)
+![Dimensional model](assets/job_ads_healthcare_dimension_model.png)
 
 - scope_of_work_min and scope_of_work_max (dim_job_details)
 These fields represent the minimum and maximum scope of work, typically in percentage terms for a job and defines the range of working hours, e.g., 50%-100%
