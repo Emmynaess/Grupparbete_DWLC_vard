@@ -12,6 +12,22 @@ Make sure to change the GRANT to reflect the names of your users and not our exa
 
 Make sure you run a virtual environment and install modules from `requirements.txt` to have everything run correctly.
 
+## dlt
+
+To get dlt working after cloning you need to create a `secrets.toml`-file in the `.dlt` subfolder in the `extract-from-api` directory. The file should contain credentials to the user `extract_loader`.
+
+```text
+[destination.snowflake.credentials]
+database = "<database_name>" # please set me up!
+password = "<password_for_extract_loader_user>" # please set me up!
+username = "<username_for_extract_loader>" # please set me up!
+host = "<account_locator.cloud_region_id.cloud>" # the part of the account-url that comes before ".snowflakecomputing.com"
+warehouse = "<warehouse name>" # please set me up!
+role = "<dlt_role_granted_to_extract_loader_user>" # please set me up!
+```
+
+After that navigate to folder `extract-from-api`in terminal and run `dlt init healthcare_job_ads snowflake`.
+
 ## DBT
 
 Make sure all your users use the same config in `~/.dbt/profiles.yml` to run the project smoothly.
