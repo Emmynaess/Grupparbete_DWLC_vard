@@ -8,25 +8,37 @@ You need to create your own snowflake account and use the `setup_wh_and_database
 Afterwards you can use `user_and_roles` to create the necessary roles and setup the marts layer.
 Make sure to change the GRANT to reflect the names of your users and not our example names.
 
-## Requirements
+## Virtual environment and requirements
 
-Make sure you run a virtual environment and install modules from `requirements.txt` to have everything run correctly.
+Make sure you run a virtual environment. For this project `uv`was used for virtual environment. If you haven't used `uv` before you can install it by running
+
+```bash
+pip install uv
+```
+
+Navigate to the main project folder and run command `uv venv`to create a virtual environment. Activate venv by running
+
+```bash
+source .venv/Scripts/activate
+```
+
+Run `uv pip install -r requirements.txt` to install all needed modules to have everything run correctly.
 
 ## dlt
 
 To get dlt working after cloning you need to create a `secrets.toml`-file in the `.dlt` subfolder in the `extract-from-api` directory. The file should contain credentials to the user `extract_loader`.
 
-```text
+```toml
 [destination.snowflake.credentials]
-database = "<database_name>" # please set me up!
-password = "<password_for_extract_loader_user>" # please set me up!
-username = "<username_for_extract_loader>" # please set me up!
+database = "<database_name>" 
+password = "<password_for_extract_loader_user>" 
+username = "<username_for_extract_loader>"
 host = "<account_locator.cloud_region_id.cloud>" # the part of the account-url that comes before ".snowflakecomputing.com"
-warehouse = "<warehouse name>" # please set me up!
-role = "<dlt_role_granted_to_extract_loader_user>" # please set me up!
+warehouse = "<warehouse name>" 
+role = "<dlt_role_granted_to_extract_loader_user>" 
 ```
 
-After that navigate to folder `extract-from-api`in terminal and run `dlt init healthcare_job_ads snowflake`.
+You should now be able to run the pipeline by executing the `healthcare_job_ads.py`file.
 
 ## DBT
 
